@@ -179,7 +179,7 @@ def plan(name: str, rng: random.Random) -> list[Epoch]:
         epochs[40].extra_lines.append("#$%^&*() not nmea at all")
         epochs[60].extra_lines.append("$GPGGA," + "9" * 90 + "*00")                  # too long
         epochs[120].extra_lines.append("$GPGGA,001,4807.038,N,01131.000*")           # truncated
-        epochs[140].extra_lines.append("$GPGSV,3,1,11,03,03,111,00,04,15,270,00*74")   # unsupported
+        epochs[140].extra_lines.append(frame("GPGSV,3,1,11,03,03,111,00,04,15,270,00"))  # unsupported
         return epochs
 
     if name == "stationary_cow":

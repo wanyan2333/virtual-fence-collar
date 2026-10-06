@@ -121,6 +121,7 @@ def test_bad_gps(sim):
     assert r.cues() == 0, "corrupt or missing GPS must never trigger a cue"
     assert r.transitions() == []
     assert int(r.summary["nmea_rejected"]) > 0
+    assert r.summary["nmea_unsupported"] == "1"   # the $GPGSV line: ignored, not an error
     reasons = {d["reason"] for _, _, d in r.only("NMEA_REJECT")}
     assert {"checksum", "format", "too_long"} <= reasons
     assert len(r.only("NO_FIX")) == 30

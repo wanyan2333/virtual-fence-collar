@@ -147,10 +147,11 @@ bool collar_app_handle_line(collar_app_t *app, const char *line, telem_record_t 
 void collar_app_log_summary(const collar_app_t *app, const telem_service_t *ts)
 {
     hal_log("SUMMARY",
-            "gps_samples=%lu;nmea_ok=%lu;nmea_rejected=%lu;transitions=%lu;audio=%lu;"
+            "gps_samples=%lu;nmea_ok=%lu;nmea_rejected=%lu;nmea_unsupported=%lu;transitions=%lu;audio=%lu;"
             "vibration=%lu;telem_sent=%lu;telem_dropped=%lu;telem_queued=%u;final_state=%s",
             (unsigned long)app->gps_samples, (unsigned long)app->nmea_stats.accepted,
-            (unsigned long)app->nmea_stats.rejected, (unsigned long)app->transitions,
+            (unsigned long)app->nmea_stats.rejected,
+            (unsigned long)app->nmea_stats.unsupported, (unsigned long)app->transitions,
             (unsigned long)app->audio_cues, (unsigned long)app->vibration_cues,
             (unsigned long)ts->sent, (unsigned long)ts->ring.dropped,
             (unsigned)telem_count(&ts->ring), collar_state_name(app->sm.state));
