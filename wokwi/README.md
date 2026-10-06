@@ -9,6 +9,9 @@ radio. GPS input is a built-in NMEA track (`track_data.h`, the
 > `SUMMARY gps_samples=245;nmea_ok=490;nmea_rejected=0;nmea_unsupported=0;transitions=4;audio=1;vibration=3;telem_sent=41;telem_dropped=0;telem_queued=10;final_state=INSIDE`.
 > The cue counts match the host simulator. `telem_queued=10` means the radio
 > was switched off with the button when the track ended.
+> A second run tested the radio buffer: offline at ~10 s gave
+> `telem_sent=8;telem_dropped=11;telem_queued=32`, and pressing again after
+> the track ended gave `TELEM_FLUSH sent=32;first_seq=19;remaining=0`.
 
 Do not edit the copies here by hand. They are generated from `core/`, `app/`
 and `hal/` by `python tools/sync_wokwi.py`, and CI fails if they drift.

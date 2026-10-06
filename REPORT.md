@@ -341,7 +341,26 @@ every fence/cue number matches. Telemetry was 41 sent + 10 still queued = 51,
 the same total as the host run (51 sent). The 10 queued records mean the radio
 was offline (button) when the track ended.
 
-Checked before that run:
+**Second run: radio buffer test on ESP32.** The button was pressed at about
+10 s real time (40 s sim):
+
+```
+SUMMARY ...;transitions=4;audio=1;vibration=3;telem_sent=8;telem_dropped=11;telem_queued=32;final_state=INSIDE
+```
+That is 8 sent before the outage, then 43 records while offline into a
+32-slot buffer, so 11 oldest were dropped (8 + 11 + 32 = 51). After the
+track ended, the button was pressed again:
+
+```
+[  358384 ms] RADIO_TX       bytes=20;frame=3100000014A803004F327AE98DB679680001ED00
+[  358392 ms] RADIO_TX       bytes=20;frame=320000009CBB03001D327AE92EB679680001F200
+[  358436 ms] TELEM_FLUSH    sent=32;first_seq=19;remaining=0
+```
+`first_seq=19` is exactly as predicted: seq 0-7 had been sent and 8-18 were
+dropped. Decoding the last frame (little-endian) gives seq=50, t=244636 ms,
+lat=-37.7867747, lon=175.2807982, state=INSIDE, fix_valid=1, gps_fixes=242.
+
+Checked before these runs:
 - `wokwi/` contains all 18 source files plus `diagram.json`.
   `python tools/sync_wokwi.py --check` says `wokwi/ is in sync`.
 - `hal_esp32.cpp` and `sketch.ino` compile with `g++ -fsyntax-only -Wall -Wextra`
@@ -383,9 +402,9 @@ Checked before that run:
 
 - **No physical hardware.** Nothing has run on a real ESP32, GPS module,
   buzzer or motor. Timing, power draw and stack sizes have not been measured.
-- **Wokwi verified by the cue/state summary only** (see §7). LED pulse
-  lengths, button debounce and the exact `TELEM_DROP`/`TELEM_FLUSH` sequence
-  on ESP32 were not recorded.
+- **Wokwi checks were by log only** (see §7). The summary counts, the
+  buffer overflow and the flush were confirmed from the Serial log. LED pulse
+  timing and button debounce were only seen on screen, not measured.
 - **CI workflow not run.** `.github/workflows/ci.yml` was written but never
   executed, because nothing was pushed to GitHub (as requested). The same
   steps do pass locally on Windows.
