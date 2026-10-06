@@ -5,10 +5,10 @@ stand in for the speaker and the vibration motor, and a button that toggles the
 radio. GPS input is a built-in NMEA track (`track_data.h`, the
 `approach_and_breach` scenario), so no GPS part is needed.
 
-> Status: these files compile on the PC against stub headers (see
-> `tests/esp32_stub/`), but **they have not yet been run in Wokwi itself**
-> (no browser test was possible while building this). If something fails to
-> compile in Wokwi, the error message will name the file and line.
+> Status: **built and run in Wokwi on 2026-10-07.** The final Serial line was
+> `SUMMARY gps_samples=245;nmea_ok=490;nmea_rejected=0;nmea_unsupported=0;transitions=4;audio=1;vibration=3;telem_sent=41;telem_dropped=0;telem_queued=10;final_state=INSIDE`.
+> The cue counts match the host simulator. `telem_queued=10` means the radio
+> was switched off with the button when the track ended.
 
 Do not edit the copies here by hand. They are generated from `core/`, `app/`
 and `hal/` by `python tools/sync_wokwi.py`, and CI fails if they drift.

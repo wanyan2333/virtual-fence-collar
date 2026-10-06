@@ -326,8 +326,22 @@ of `.text`; 0 B `.data`/`.bss` (no global state in `core/`).
 
 ## 7. Wokwi status
 
-**Not run. Instructions are provided** in [`wokwi/README.md`](wokwi/README.md).
-I can't use a browser session for wokwi.com here. What was verified:
+**Built and run in the browser by the project owner on 2026-10-07**, following
+[`wokwi/README.md`](wokwi/README.md). I could not open Wokwi myself; this
+result comes from a screenshot of the Serial monitor. Last lines:
+
+```
+[  250140 ms] SUMMARY gps_samples=245;nmea_ok=490;nmea_rejected=0;nmea_unsupported=0;transitions=4;audio=1;vibration=3;telem_sent=41;telem_dropped=0;telem_queued=10;final_state=INSIDE
+[  250184 ms] TRACK_END      msg=press the green button or restart the simulation
+```
+
+Compared with the host run of the same `approach_and_breach` track
+(`gps_samples=245;nmea_ok=490;transitions=4;audio=1;vibration=3;final_state=INSIDE`),
+every fence/cue number matches. Telemetry was 41 sent + 10 still queued = 51,
+the same total as the host run (51 sent). The 10 queued records mean the radio
+was offline (button) when the track ended.
+
+Checked before that run:
 - `wokwi/` contains all 18 source files plus `diagram.json`.
   `python tools/sync_wokwi.py --check` says `wokwi/ is in sync`.
 - `hal_esp32.cpp` and `sketch.ino` compile with `g++ -fsyntax-only -Wall -Wextra`
@@ -369,8 +383,9 @@ I can't use a browser session for wokwi.com here. What was verified:
 
 - **No physical hardware.** Nothing has run on a real ESP32, GPS module,
   buzzer or motor. Timing, power draw and stack sizes have not been measured.
-- **Wokwi not run** (see §7). The ESP32 code has only been compile-checked
-  against stubs.
+- **Wokwi verified by the cue/state summary only** (see §7). LED pulse
+  lengths, button debounce and the exact `TELEM_DROP`/`TELEM_FLUSH` sequence
+  on ESP32 were not recorded.
 - **CI workflow not run.** `.github/workflows/ci.yml` was written but never
   executed, because nothing was pushed to GitHub (as requested). The same
   steps do pass locally on Windows.

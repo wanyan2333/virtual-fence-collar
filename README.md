@@ -163,9 +163,11 @@ Plots for every scenario are in [`docs/`](docs/).
 ## ESP32 / Wokwi
 
 See [`wokwi/README.md`](wokwi/README.md) for step-by-step browser
-instructions. The ESP32 code has been **compile-checked on the PC against stub
-headers only**. It has not been built with the real ESP32 toolchain or run in
-Wokwi yet.
+instructions. The project has been **built and run in Wokwi** (2026-10-07).
+Its final `SUMMARY` line matches the host simulator on the same track: 245 GPS
+samples, 4 state changes, 1 audio cue and 3 vibration cues, ending INSIDE.
+That shows the same `core/` code behaves the same way on the ESP32/FreeRTOS
+build. It has not run on a physical board.
 
 ## Further reading in this repo
 
