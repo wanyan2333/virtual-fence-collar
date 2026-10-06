@@ -326,6 +326,8 @@ of `.text`; 0 B `.data`/`.bss` (no global state in `core/`).
 
 ## 7. Wokwi status
 
+Public project: <https://wokwi.com/projects/477160093961702401> (checked to open without logging in).
+
 **Built and run in the browser by the project owner on 2026-10-07**, following
 [`wokwi/README.md`](wokwi/README.md). I could not open Wokwi myself; this
 result comes from a screenshot of the Serial monitor. Last lines:
@@ -433,7 +435,7 @@ Checked before these runs:
   corrupt NMEA, fix loss, a stationary animal and a radio outage. On a noisy
   boundary track, hysteresis cut false vibration cues from 2 to 0. Also wrote
   a GitHub Actions CI workflow for them (not yet run on GitHub).
-- Ported the same core logic to an ESP32 Wokwi simulation (no physical board)
+- Ported the same core logic to an ESP32 Wokwi simulation (no physical board; public link)
   using Arduino-ESP32 and FreeRTOS: separate GPS/fence and telemetry tasks
   linked by a queue, interrupt-driven radio toggle, and LEDs as stand-ins
   for the audio and vibration actuators.

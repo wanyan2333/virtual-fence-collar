@@ -11,6 +11,10 @@ Background on the idea: [Virtual fence (Wikipedia)](https://en.wikipedia.org/wik
 > **ESP32 simulation in [Wokwi](https://wokwi.com)** (LEDs stand in for the
 > speaker and the vibration motor). It is a learning and portfolio project, not
 > a product.
+>
+> ▶ **Try it in the browser:** [Wokwi ESP32 simulation](https://wokwi.com/projects/477160093961702401). Press the
+> green Run button. The yellow LED is the audio cue, the red LED is vibration,
+> and the green button switches the radio off and on.
 
 ![approach and breach run](docs/approach_and_breach.png)
 
@@ -162,7 +166,9 @@ Plots for every scenario are in [`docs/`](docs/).
 
 ## ESP32 / Wokwi
 
-See [`wokwi/README.md`](wokwi/README.md) for step-by-step browser
+**Live project: <https://wokwi.com/projects/477160093961702401>**
+
+To rebuild it from this repo, see [`wokwi/README.md`](wokwi/README.md) for step-by-step browser
 instructions. The project has been **built and run in Wokwi** (2026-10-07).
 Its final `SUMMARY` line matches the host simulator on the same track: 245 GPS
 samples, 4 state changes, 1 audio cue and 3 vibration cues, ending INSIDE.

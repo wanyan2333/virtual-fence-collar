@@ -1,5 +1,8 @@
 # Running the collar firmware on a simulated ESP32 (Wokwi)
 
+**Ready-made project: <https://wokwi.com/projects/477160093961702401>.** Open it and press Run. The steps
+below are only needed if you want to rebuild it from this repo.
+
 This folder is a complete, flat Wokwi project: an ESP32 DevKit, two LEDs that
 stand in for the speaker and the vibration motor, and a button that toggles the
 radio. GPS input is a built-in NMEA track (`track_data.h`, the
