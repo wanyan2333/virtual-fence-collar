@@ -407,9 +407,10 @@ Checked before these runs:
 - **Wokwi checks were by log only** (see §7). The summary counts, the
   buffer overflow and the flush were confirmed from the Serial log. LED pulse
   timing and button debounce were only seen on screen, not measured.
-- **CI workflow not run.** `.github/workflows/ci.yml` was written but never
-  executed, because nothing was pushed to GitHub (as requested). The same
-  steps do pass locally on Windows.
+- CI runs on GitHub Actions (ubuntu-latest). The first run, on commit `5e0c148`,
+  passed every step: build, Unity, pytest, Wokwi sync check, ESP32 stub
+  compile check and plots. Run: https://github.com/wanyan2333/virtual-fence-collar/actions/runs/37518377772. It only covers Linux/GCC and the host
+  build; CI does not build for the ESP32.
 - GPS noise in the scenarios is independent Gaussian noise. Real GPS error
   is correlated over time and has multipath jumps, so the hysteresis depth of
   2 might not be enough on real data.
@@ -434,7 +435,7 @@ Checked before these runs:
   replay generated GPS tracks through a PC simulator: noisy boundaries,
   corrupt NMEA, fix loss, a stationary animal and a radio outage. On a noisy
   boundary track, hysteresis cut false vibration cues from 2 to 0. Also wrote
-  a GitHub Actions CI workflow for them (not yet run on GitHub).
+  a GitHub Actions CI workflow that runs them on every push.
 - Ported the same core logic to an ESP32 Wokwi simulation (no physical board; public link)
   using Arduino-ESP32 and FreeRTOS: separate GPS/fence and telemetry tasks
   linked by a queue, interrupt-driven radio toggle, and LEDs as stand-ins

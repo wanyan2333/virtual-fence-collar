@@ -1,5 +1,7 @@
 # Virtual Fence Collar Firmware (simulated)
 
+[![ci](https://github.com/wanyan2333/virtual-fence-collar/actions/workflows/ci.yml/badge.svg)](https://github.com/wanyan2333/virtual-fence-collar/actions/workflows/ci.yml)
+
 Firmware for a GPS livestock collar that enforces a **virtual fence**: no
 posts or wire, just a polygon on a map. When an animal walks towards the
 boundary the collar plays a sound. If it keeps going and crosses, the collar
