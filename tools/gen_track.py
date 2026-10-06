@@ -158,8 +158,8 @@ def plan(name: str, rng: random.Random) -> list[Epoch]:
     if name == "approach_and_breach":
         path = (walk([(100, 40), (215, 40)], 1.0)      # through the warning band
                 + stay((215, 40), 35)                   # outside: escalate
-                + walk([(215, 40), (150, 40)], 1.0)     # walk back in
-                + stay((150, 40), 20))
+                + walk([(215, 40), (205, 25), (150, 25)], 1.0)  # walk back in
+                + stay((150, 25), 20))
         return [Epoch(x, y) for x, y in path]
 
     if name == "gps_noise_at_boundary":

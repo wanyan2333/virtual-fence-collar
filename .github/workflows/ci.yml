@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          python3 -m pip install --upgrade pip
+          python3 -m pip install pytest matplotlib
+
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Unity unit tests
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Scenario tests (pytest)
+        run: python3 -m pytest tests -v
+
+      - name: Wokwi copies are in sync with core/
+        run: python3 tools/sync_wokwi.py --check
+
+      - name: ESP32 code syntax check (stub headers, not a real ESP32 build)
+        run: |
+          for f in hal_esp32.cpp sketch.ino; do
+            g++ -std=gnu++17 -Wall -Wextra -fsyntax-only -Itests/esp32_stub -Iwokwi -x c++ "wokwi/$f"
+          done
+
+      - name: Plots
+        run: |
+          for s in grazing_inside approach_and_breach gps_noise_at_boundary bad_gps stationary_cow radio_offline; do
+            python3 tools/plot_run.py "$s" --out "build/plots/$s.png"
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scenario-results
+          path: |
+            build/scenarios/*.csv
+            build/plots/*.png

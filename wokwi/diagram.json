@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "author": "virtual-fence-collar",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led_audio",
+      "top": -10,
+      "left": 190,
+      "attrs": { "color": "yellow", "label": "AUDIO" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_audio",
+      "top": 80,
+      "left": 140,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_vib",
+      "top": -10,
+      "left": 260,
+      "attrs": { "color": "red", "label": "VIBRATION" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_vib",
+      "top": 80,
+      "left": 210,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_radio",
+      "top": 200,
+      "left": 190,
+      "attrs": { "color": "green", "label": "RADIO ON/OFF" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:26", "r_audio:1", "orange", [] ],
+    [ "r_audio:2", "led_audio:A", "orange", [] ],
+    [ "led_audio:C", "esp:GND.2", "black", [] ],
+    [ "esp:27", "r_vib:1", "red", [] ],
+    [ "r_vib:2", "led_vib:A", "red", [] ],
+    [ "led_vib:C", "esp:GND.2", "black", [] ],
+    [ "esp:14", "btn_radio:1.l", "green", [] ],
+    [ "btn_radio:2.l", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
